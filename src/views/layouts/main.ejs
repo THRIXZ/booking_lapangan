@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+  </head>
+  <body class="min-h-screen text-slate-900">
+    <div class="page-grid">
+      <%- include("../partials/navbar") %>
+
+      <% if (currentUser) { %>
+        <header class="mb-6 card">
+          <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p class="text-sm uppercase tracking-[0.3em] text-emerald-700">Halo, <%= currentUser.name %></p>
+              <h1 class="text-3xl font-black"><%= title || "Dashboard" %></h1>
+              <p class="text-sm text-slate-600">Role: <span class="font-semibold capitalize"><%= currentUser.role %></span></p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <% if (currentUser.role === "admin") { %>
+                <a class="btn-primary" href="/admin/bookings">Kelola Booking</a>
+                <a class="btn-ghost" href="/admin/courts">Tambah Lapangan</a>
+              <% } else { %>
+                <a class="btn-primary" href="/user/bookings/create">Buat Booking</a>
+                <a class="btn-ghost" href="/user/courts">Lihat Lapangan</a>
+              <% } %>
+            </div>
+          </div>
+        </header>
+      <% } %>
+
+      <% if (success.length) { %>
+        <div class="mb-4 flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-emerald-800">
+          <span class="text-lg">✔</span>
+          <div><%= success[0] %></div>
+        </div>
+      <% } %>
+      <% if (error.length) { %>
+        <div class="mb-4 flex items-start gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-5 py-4 text-rose-700">
+          <span class="text-lg">⚠</span>
+          <div><%= error[0] %></div>
+        </div>
+      <% } %>
+      <% if (validationErrors.length) { %>
+        <div class="mb-4 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-amber-800">
+          <span class="text-lg">!</span>
+          <ul class="space-y-1 text-sm">
+            <% validationErrors.forEach((item) => { %>
+              <li><%= item %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <main class="mt-6"><%- body %></main>
+
+      <%- include("../partials/footer") %>
+    </div>
+
+    <% if (currentUser) { %>
+      <div class="bottom-nav">
+        <% if (currentUser.role === 'admin') { %>
+          <a href="/admin/dashboard" class="active">Home</a>
+          <a href="/admin/courts">Courts</a>
+          <a href="/admin/bookings">Booking</a>
+          <a href="/profile">Profil</a>
+        <% } else { %>
+          <a href="/user/dashboard" class="active">Home</a>
+          <a href="/user/courts">Cari</a>
+          <a href="/user/bookings">Booking</a>
+          <a href="/profile">Profil</a>
+        <% } %>
+      </div>
+    <% } %>
+  </body>
+</html>

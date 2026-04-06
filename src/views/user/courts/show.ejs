@@ -1,0 +1,17 @@
+<section class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+  <div class="overflow-hidden rounded-[2rem] bg-white shadow-card">
+    <img src="<%= court.image || 'https://placehold.co/1200x700?text=Court' %>" alt="<%= court.name %>" class="h-80 w-full object-cover" />
+    <div class="p-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-700"><%= court.type %></p>
+      <h2 class="mt-2 text-3xl font-black"><%= court.name %></h2>
+      <p class="mt-4 text-slate-600">Lapangan ini tersedia untuk pemesanan dengan sistem booking per jam.</p>
+    </div>
+  </div>
+  <aside class="rounded-[2rem] bg-slate-900 p-6 text-white shadow-card">
+    <p class="text-sm uppercase tracking-[0.25em] text-slate-300">Ringkasan</p>
+    <h3 class="mt-3 text-3xl font-black">Rp <%= Number(court.price_per_hour).toLocaleString("id-ID") %></h3>
+    <p class="mt-2 text-sm text-slate-300">per jam</p>
+    <p class="mt-6 text-sm text-slate-300">Status: <span class="font-semibold capitalize text-white"><%= court.status %></span></p>
+    <a href="/user/bookings/create?court=<%= court.id %>" class="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900">Lanjut Booking</a>
+  </aside>
+</section>

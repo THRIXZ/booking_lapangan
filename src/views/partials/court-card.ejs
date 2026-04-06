@@ -1,0 +1,27 @@
+<article class="overflow-hidden card hover:-translate-y-1 transition-transform relative snap-start">
+  <button class="favorite-btn" data-court="<%= court.id %>">❤</button>
+  <div class="relative">
+    <img src="<%= court.image || 'https://placehold.co/800x500?text=Court' %>" alt="<%= court.name %>" class="w-full aspect-[16/10] object-cover" />
+    <span class="badge-cat <%= court.type === 'badminton' ? 'cat-badminton' : court.type === 'futsal' ? 'cat-futsal' : 'cat-basket' %> absolute left-3 top-3">
+      <%= court.type %>
+    </span>
+    <span class="badge <%= court.status === 'active' ? 'badge-success' : 'badge-warning' %> absolute right-3 top-3">
+      <%= court.status === 'active' ? 'Available' : 'Limited' %>
+    </span>
+  </div>
+  <div class="p-5 space-y-2">
+    <h3 class="text-xl font-black flex items-center gap-2">
+      <%= court.name %>
+      <span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600">📍 2.5 km</span>
+    </h3>
+    <div class="rating">⭐ 4.5 <span class="text-slate-500">(120)</span></div>
+    <div class="price-wrap">
+      <span class="price-old">Rp <%= (Number(court.price_per_hour) * 1.2).toLocaleString("id-ID") %></span>
+      <span class="font-bold">Rp <%= Number(court.price_per_hour).toLocaleString("id-ID") %>/jam</span>
+    </div>
+    <div class="flex gap-3 pt-2">
+      <a href="/user/courts/<%= court.id %>" class="btn-ghost text-sm">Lihat Detail</a>
+      <a href="/user/bookings/create?court=<%= court.id %>" class="btn-primary text-sm w-full justify-center">Booking</a>
+    </div>
+  </div>
+</article>

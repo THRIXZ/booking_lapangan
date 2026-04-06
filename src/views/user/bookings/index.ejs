@@ -1,0 +1,38 @@
+<section class="card">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h2 class="text-2xl font-black">Booking Saya</h2>
+      <p class="text-sm text-slate-600">Riwayat booking yang sudah kamu buat.</p>
+    </div>
+    <a href="/user/bookings/create" class="btn-primary">Buat Booking</a>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="table-slim">
+      <thead>
+        <tr>
+          <th>Lapangan</th>
+          <th>Tanggal</th>
+          <th>Jam</th>
+          <th>Durasi</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Pembayaran</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bookings.forEach((booking) => { %>
+          <tr class="border-t border-slate-100">
+            <td class="py-4 font-semibold"><%= booking.court_name %></td>
+            <td class="py-4"><%= booking.booking_date.toISOString().slice(0, 10) %></td>
+            <td class="py-4"><%= String(booking.start_time).slice(0, 5) %> - <%= String(booking.end_time).slice(0, 5) %></td>
+            <td class="py-4"><%= booking.duration %> jam</td>
+            <td class="py-4">Rp <%= Number(booking.total_price).toLocaleString("id-ID") %></td>
+            <td class="py-4"><span class="badge <%= booking.status === 'completed' ? 'badge-success' : booking.status === 'pending' ? 'badge-warning' : booking.status === 'cancelled' ? 'badge-danger' : 'badge-muted' %>"><%= booking.status %></span></td>
+            <td class="py-4"><span class="badge <%= booking.payment_status === 'paid' ? 'badge-success' : 'badge-danger' %>"><%= booking.payment_status %></span></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

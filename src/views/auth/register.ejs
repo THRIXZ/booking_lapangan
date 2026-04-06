@@ -1,0 +1,30 @@
+<section class="mx-auto max-w-xl card">
+  <p class="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-700">Create account</p>
+  <h1 class="mt-3 text-3xl font-black">Daftar akun baru</h1>
+
+  <form action="/register" method="POST" class="mt-8 grid gap-5 md:grid-cols-2">
+    <div class="md:col-span-2">
+      <label class="mb-2 block text-sm font-semibold text-slate-700">Nama</label>
+      <input type="text" name="name" value="<%= formData.name || '' %>" class="input" />
+    </div>
+    <div>
+      <label class="mb-2 block text-sm font-semibold text-slate-700">Email</label>
+      <input type="email" name="email" value="<%= formData.email || '' %>" class="input" />
+    </div>
+    <div>
+      <label class="mb-2 block text-sm font-semibold text-slate-700">Telepon</label>
+      <input type="text" name="phone" value="<%= formData.phone || '' %>" class="input" />
+    </div>
+    <div>
+      <label class="mb-2 block text-sm font-semibold text-slate-700">Password</label>
+      <input type="password" name="password" class="input" />
+    </div>
+    <div>
+      <label class="mb-2 block text-sm font-semibold text-slate-700">Konfirmasi Password</label>
+      <input type="password" name="password_confirmation" class="input" />
+    </div>
+    <button class="md:col-span-2 btn-primary">Buat Akun</button>
+  </form>
+
+  <p class="mt-6 text-sm text-slate-600">Sudah punya akun? <a href="/login" class="font-semibold text-emerald-700">Login</a></p>
+</section>

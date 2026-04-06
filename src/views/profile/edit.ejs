@@ -1,0 +1,32 @@
+<section class="mx-auto max-w-4xl card">
+  <h2 class="text-2xl font-black">Edit Profile</h2>
+  <form action="/profile?_method=PATCH" method="POST" class="mt-6 grid gap-5 md:grid-cols-2">
+    <div class="md:col-span-2">
+      <label class="mb-2 block text-sm font-semibold">Nama</label>
+      <input type="text" name="name" value="<%= formData.name || currentUser.name %>" class="input" />
+    </div>
+    <div>
+      <label class="mb-2 block text-sm font-semibold">Email</label>
+      <input type="email" name="email" value="<%= formData.email || currentUser.email %>" class="input" />
+    </div>
+    <div>
+      <label class="mb-2 block text-sm font-semibold">Telepon</label>
+      <input type="text" name="phone" value="<%= formData.phone || currentUser.phone || '' %>" class="input" />
+    </div>
+    <div>
+      <label class="mb-2 block text-sm font-semibold">Password Baru</label>
+      <input type="password" name="password" class="input" />
+    </div>
+    <div>
+      <label class="mb-2 block text-sm font-semibold">Konfirmasi Password</label>
+      <input type="password" name="password_confirmation" class="input" />
+    </div>
+    <button class="md:col-span-2 btn-primary">Update Profile</button>
+  </form>
+
+  <form action="/profile?_method=DELETE" method="POST" class="mt-8 rounded-3xl border border-rose-200 bg-rose-50 p-5">
+    <h3 class="text-lg font-black text-rose-700">Hapus akun</h3>
+    <p class="mt-2 text-sm text-rose-600">Tindakan ini akan menghapus akun beserta booking milikmu.</p>
+    <button class="mt-4 btn-danger">Hapus Akun</button>
+  </form>
+</section>

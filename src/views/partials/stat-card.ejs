@@ -1,0 +1,14 @@
+<div class="stat-card" style="background:<%= gradient %>;">
+  <div class="flex items-center gap-3">
+    <div class="stat-icon">
+      <%= icon %>
+    </div>
+    <p class="text-sm font-semibold"><%= label %></p>
+    <% if (trend) { %>
+      <span class="badge <%= trend > 0 ? 'badge-success' : 'badge-danger' %>"><%= trend > 0 ? '+' : '' %><%= trend %>%</span>
+    <% } %>
+  </div>
+  <div class="mt-4 flex items-end gap-2">
+    <h2 class="text-4xl font-black counter" data-target="<%= value %>"><%= value %></h2>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "name": "badminton-booking-node",
+  "version": "1.0.0",
+  "description": "Badminton booking app built with Node.js, Express, Tailwind, and MySQL",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js",
+    "dev:css": "tailwindcss -i ./src/public/css/input.css -o ./src/public/css/app.css --watch",
+    "build:css": "tailwindcss -i ./src/public/css/input.css -o ./src/public/css/app.css --minify",
+    "postinstall": "npm run build:css"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.1",
+    "method-override": "^3.0.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.10"
+  }
+}

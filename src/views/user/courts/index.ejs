@@ -1,0 +1,35 @@
+<section>
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h2 class="text-2xl font-black">Daftar Lapangan</h2>
+      <p class="text-sm text-slate-600">Pilih lapangan favoritmu dan lanjutkan ke booking.</p>
+    </div>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    <% courts.forEach((court) => { %>
+      <article class="overflow-hidden card hover:-translate-y-1 transition-transform relative">
+        <button class="favorite-btn">❤</button>
+        <div class="relative">
+          <img src="<%= court.image || 'https://placehold.co/800x500?text=Court' %>" alt="<%= court.name %>" class="h-52 w-full object-cover" />
+          <span class="badge-cat <%= court.type === 'badminton' ? 'cat-badminton' : court.type === 'futsal' ? 'cat-futsal' : 'cat-basket' %> absolute left-3 top-3">
+            <%= court.type %>
+          </span>
+        </div>
+        <div class="p-5 space-y-2">
+          <h3 class="text-xl font-black"><%= court.name %></h3>
+          <div class="rating">⭐ 4.5 <span class="text-slate-500">(120)</span></div>
+          <p class="text-sm text-slate-500">📍 2.5 km dari lokasimu</p>
+          <div class="price-wrap">
+            <span class="price-old">Rp <%= (Number(court.price_per_hour) * 1.2).toLocaleString("id-ID") %></span>
+            <span class="font-bold">Rp <%= Number(court.price_per_hour).toLocaleString("id-ID") %>/jam</span>
+          </div>
+          <div class="flex gap-3 pt-2">
+            <a href="/user/courts/<%= court.id %>" class="btn-ghost text-sm">Lihat Detail</a>
+            <a href="/user/bookings/create?court=<%= court.id %>" class="btn-primary text-sm">Booking</a>
+          </div>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>

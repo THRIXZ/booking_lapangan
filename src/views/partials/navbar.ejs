@@ -1,0 +1,37 @@
+<nav class="relative z-10 mb-6 flex items-center justify-between rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-600 px-5 py-3 shadow-card text-white overflow-visible">
+  <div class="flex items-center gap-3">
+    <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/15 text-white font-black">BL</div>
+    <div>
+      <p class="text-xs uppercase tracking-[0.3em] text-emerald-200">Booking Lapangan</p>
+      <p class="text-sm font-semibold text-white">Pilih lapangan favorit Anda</p>
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center gap-2 text-sm font-semibold">
+    <% if (currentUser) { %>
+      <% if (currentUser.role === "admin") { %>
+        <a class="pill-nav text-white border-white/30" href="/admin/dashboard">Dashboard</a>
+        <a class="pill-nav text-white border-white/30" href="/admin/courts">Courts</a>
+        <a class="pill-nav text-white border-white/30" href="/admin/schedules">Schedules</a>
+        <a class="pill-nav text-white border-white/30" href="/admin/bookings">Bookings</a>
+      <% } else { %>
+        <a class="pill-nav text-white border-white/30" href="/user/dashboard">Dashboard</a>
+        <a class="pill-nav text-white border-white/30" href="/user/courts">Courts</a>
+        <a class="pill-nav text-white border-white/30" href="/user/bookings">My Bookings</a>
+      <% } %>
+      <a class="pill-nav text-white border-white/30" href="/profile">Profile</a>
+      <div class="relative nav-profile">
+        <div class="avatar"><%= currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'A' %></div>
+        <div class="dropdown z-30" style="top: 120%; right: 0;">
+          <a href="/profile">Profil</a>
+          <a href="<%= currentUser.role === 'admin' ? '/admin/bookings' : '/user/bookings' %>">Riwayat Booking</a>
+          <form action="/logout" method="POST">
+            <button type="submit">Logout</button>
+          </form>
+        </div>
+      </div>
+    <% } else { %>
+      <a class="btn-ghost border-white/30 text-white hover:bg-white/10" href="/login">Login</a>
+      <a class="btn-primary" href="/register">Register</a>
+    <% } %>
+  </div>
+</nav>

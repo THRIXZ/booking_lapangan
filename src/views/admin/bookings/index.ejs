@@ -1,0 +1,48 @@
+<section class="card">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h2 class="text-2xl font-black">Semua Booking</h2>
+      <p class="text-sm text-slate-600">Pantau seluruh booking yang dibuat pengguna.</p>
+    </div>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="table-slim">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Lapangan</th>
+          <th>Tanggal</th>
+          <th>Jam</th>
+          <th>Status</th>
+          <th>Pembayaran</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bookings.forEach((booking) => { %>
+          <tr class="border-t border-slate-100">
+            <td class="py-4">
+              <p class="font-semibold"><%= booking.user_name %></p>
+              <p class="text-xs text-slate-500"><%= booking.user_email %></p>
+            </td>
+            <td class="py-4 font-semibold"><%= booking.court_name %></td>
+            <td class="py-4"><%= booking.booking_date.toISOString().slice(0, 10) %></td>
+            <td class="py-4"><%= String(booking.start_time).slice(0, 5) %> - <%= String(booking.end_time).slice(0, 5) %></td>
+            <td class="py-4">
+              <% const statusMap = { pending: 'badge-warning', confirmed: 'badge-success', completed: 'badge-success', cancelled: 'badge-danger' }; %>
+              <span class="badge <%= statusMap[booking.status] || 'badge-muted' %>"><%= booking.status %></span>
+            </td>
+            <td class="py-4">
+              <% const payMap = { unpaid: 'badge-danger', paid: 'badge-success' }; %>
+              <span class="badge <%= payMap[booking.payment_status] || 'badge-muted' %>"><%= booking.payment_status %></span>
+            </td>
+            <td class="py-4">
+              <a href="/admin/bookings/<%= booking.id %>/edit" class="btn-primary text-xs">Update</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

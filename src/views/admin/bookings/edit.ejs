@@ -1,0 +1,29 @@
+<section class="mx-auto max-w-3xl rounded-[2rem] bg-white p-6 shadow-card">
+  <h2 class="text-2xl font-black">Update Status Booking</h2>
+  <div class="mt-6 grid gap-4 rounded-3xl bg-slate-50 p-5 md:grid-cols-2">
+    <div><span class="text-xs uppercase tracking-[0.25em] text-slate-500">User</span><p class="mt-2 font-semibold"><%= booking.user_name %></p></div>
+    <div><span class="text-xs uppercase tracking-[0.25em] text-slate-500">Lapangan</span><p class="mt-2 font-semibold"><%= booking.court_name %></p></div>
+    <div><span class="text-xs uppercase tracking-[0.25em] text-slate-500">Tanggal</span><p class="mt-2 font-semibold"><%= booking.booking_date.toISOString().slice(0, 10) %></p></div>
+    <div><span class="text-xs uppercase tracking-[0.25em] text-slate-500">Total</span><p class="mt-2 font-semibold">Rp <%= Number(booking.total_price).toLocaleString("id-ID") %></p></div>
+  </div>
+
+  <form action="/admin/bookings/<%= booking.id %>?_method=PUT" method="POST" class="mt-6 grid gap-5 md:grid-cols-2">
+    <div>
+      <label class="mb-2 block text-sm font-semibold">Status Booking</label>
+      <select name="status" class="w-full rounded-2xl border border-slate-200 px-4 py-3">
+        <% ["pending", "confirmed", "completed", "cancelled"].forEach((status) => { %>
+          <option value="<%= status %>" <%= booking.status === status ? "selected" : "" %>><%= status %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div>
+      <label class="mb-2 block text-sm font-semibold">Status Pembayaran</label>
+      <select name="payment_status" class="w-full rounded-2xl border border-slate-200 px-4 py-3">
+        <% ["unpaid", "paid"].forEach((status) => { %>
+          <option value="<%= status %>" <%= booking.payment_status === status ? "selected" : "" %>><%= status %></option>
+        <% }) %>
+      </select>
+    </div>
+    <button class="md:col-span-2 rounded-2xl bg-slate-900 px-5 py-3 font-semibold text-white">Simpan Perubahan</button>
+  </form>
+</section>

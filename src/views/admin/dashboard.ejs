@@ -1,0 +1,62 @@
+<section class="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+  <div class="stat-card" style="background:linear-gradient(135deg,#0ea5e9,#2563eb);">
+    <div class="flex items-center gap-3">
+      <div class="stat-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/><path d="M8 6v12M16 6v12"/></svg>
+      </div>
+      <p class="text-sm font-semibold">Total Courts</p>
+    </div>
+    <h2 class="mt-4 text-4xl font-black leading-tight"><%= stats.totalCourts %></h2>
+  </div>
+  <div class="stat-card" style="background:linear-gradient(135deg,#22c55e,#16a34a);">
+    <div class="flex items-center gap-3">
+      <div class="stat-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      </div>
+      <p class="text-sm font-semibold">Total Schedules</p>
+    </div>
+    <h2 class="mt-4 text-4xl font-black leading-tight"><%= stats.totalSchedules %></h2>
+  </div>
+  <div class="stat-card" style="background:linear-gradient(135deg,#f97316,#fb923c);">
+    <div class="flex items-center gap-3">
+      <div class="stat-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h10l4 4v14H3V3h4z"/><path d="M7 3v4h10"/></svg>
+      </div>
+      <p class="text-sm font-semibold">Total Bookings</p>
+    </div>
+    <h2 class="mt-4 text-4xl font-black leading-tight"><%= stats.totalBookings %></h2>
+  </div>
+  <div class="stat-card" style="background:linear-gradient(135deg,#8b5cf6,#6366f1);">
+    <div class="flex items-center gap-3">
+      <div class="stat-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <p class="text-sm font-semibold">Today Bookings</p>
+    </div>
+    <h2 class="mt-4 text-4xl font-black leading-tight"><%= stats.todayBookings %></h2>
+  </div>
+  <div class="stat-card xl:col-span-2" style="background:linear-gradient(135deg,#0f172a,#0ea5e9); padding:2rem;">
+    <div class="flex items-center gap-3">
+      <div class="stat-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <p class="text-sm font-semibold">Revenue Paid</p>
+    </div>
+    <h2 class="mt-4 text-4xl font-black leading-tight">Rp <%= Number(stats.totalRevenue).toLocaleString("id-ID") %></h2>
+  </div>
+</section>
+
+<section class="mt-8 grid gap-5 lg:grid-cols-3">
+  <a href="/admin/courts" class="card hover:-translate-y-1 transition-transform">
+    <h3 class="text-xl font-black">Kelola Lapangan</h3>
+    <p class="mt-2 text-sm text-slate-600">Tambah, ubah, dan hapus data lapangan.</p>
+  </a>
+  <a href="/admin/schedules" class="card hover:-translate-y-1 transition-transform">
+    <h3 class="text-xl font-black">Kelola Jadwal</h3>
+    <p class="mt-2 text-sm text-slate-600">Atur tanggal, jam, dan ketersediaan jadwal.</p>
+  </a>
+  <a href="/admin/bookings" class="card hover:-translate-y-1 transition-transform">
+    <h3 class="text-xl font-black">Kelola Booking</h3>
+    <p class="mt-2 text-sm text-slate-600">Konfirmasi booking dan ubah status pembayaran.</p>
+  </a>
+</section>

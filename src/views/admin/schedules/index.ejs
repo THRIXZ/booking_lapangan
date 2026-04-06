@@ -1,0 +1,43 @@
+<section class="card">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h2 class="text-2xl font-black">Data Jadwal</h2>
+      <p class="text-sm text-slate-600">Atur jam operasional setiap lapangan.</p>
+    </div>
+    <a href="/admin/schedules/create" class="btn-primary">Tambah Jadwal</a>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="table-slim">
+      <thead>
+        <tr>
+          <th>Lapangan</th>
+          <th>Tanggal</th>
+          <th>Jam</th>
+          <th>Available</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% schedules.forEach((schedule) => { %>
+          <tr class="border-t border-slate-100">
+            <td class="py-4 font-semibold"><%= schedule.court_name %></td>
+            <td class="py-4"><%= schedule.date.toISOString().slice(0, 10) %></td>
+            <td class="py-4"><%= String(schedule.start_time).slice(0, 5) %> - <%= String(schedule.end_time).slice(0, 5) %></td>
+            <td class="py-4">
+              <span class="badge <%= Number(schedule.is_available) ? 'badge-success' : 'badge-muted' %>"><%= Number(schedule.is_available) ? "Yes" : "No" %></span>
+            </td>
+            <td class="py-4">
+              <div class="flex gap-2">
+                <a href="/admin/schedules/<%= schedule.id %>/edit" class="btn-ghost text-xs">Edit</a>
+                <form action="/admin/schedules/<%= schedule.id %>?_method=DELETE" method="POST">
+                  <button class="btn-danger text-xs">Hapus</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

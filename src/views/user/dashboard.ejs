@@ -1,0 +1,114 @@
+<section class="hero">
+  <div class="relative z-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div>
+      <p class="text-sm uppercase tracking-[0.3em] text-emerald-200">Halo, <%= currentUser.name %>! 👋</p>
+      <h1 class="text-3xl font-black">Siap bermain hari ini?</h1>
+      <p class="mt-2 text-sm text-slate-200">Pilih lapangan favoritmu dan mulai bergerak!</p>
+      <div class="cta-row mt-4">
+        <a href="/user/bookings/create" class="cta-primary">Booking Cepat</a>
+        <a href="/user/courts" class="cta-secondary">Lihat Jadwal</a>
+      </div>
+    </div>
+    <div class="mt-4 md:mt-0 flex gap-4 text-sm text-white">
+      <div class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-emerald-400"></span> Available</div>
+      <div class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-amber-400"></span> Limited</div>
+      <div class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-rose-400"></span> Full</div>
+    </div>
+  </div>
+</section>
+
+<section class="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+  <div class="stat-card" style="background:linear-gradient(135deg,#0ea5e9,#2563eb);">
+    <div class="flex items-center gap-3">
+      <div class="stat-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </div>
+      <p class="text-sm font-semibold">Total Booking</p>
+    </div>
+    <h2 class="mt-4 text-4xl font-black leading-tight"><%= stats.totalBookings %></h2>
+  </div>
+  <div class="stat-card" style="background:linear-gradient(135deg,#22c55e,#16a34a);">
+    <div class="flex items-center gap-3">
+      <div class="stat-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <p class="text-sm font-semibold">Upcoming</p>
+    </div>
+    <h2 class="mt-4 text-4xl font-black leading-tight"><%= stats.upcomingBookings %></h2>
+  </div>
+  <div class="stat-card" style="background:linear-gradient(135deg,#8b5cf6,#6366f1);">
+    <div class="flex items-center gap-3">
+      <div class="stat-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg>
+      </div>
+      <p class="text-sm font-semibold">Completed</p>
+    </div>
+    <h2 class="mt-4 text-4xl font-black leading-tight"><%= stats.completedBookings %></h2>
+  </div>
+  <div class="stat-card" style="background:linear-gradient(135deg,#f43f5e,#fb7185);">
+    <div class="flex items-center gap-3">
+      <div class="stat-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 7l-7 7-5-5"/></svg>
+      </div>
+      <p class="text-sm font-semibold">Cancelled</p>
+    </div>
+    <h2 class="mt-4 text-4xl font-black leading-tight">0</h2>
+  </div>
+</section>
+
+<section class="mt-8 grid gap-5 lg:grid-cols-2">
+  <div class="card">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-xl font-black">Booking Mendatang</h3>
+      <span class="badge badge-success">3 jadwal</span>
+    </div>
+    <div class="space-y-3">
+      <% (bookings || []).slice(0,3).forEach((b, idx) => { %>
+        <div class="flex items-center gap-3 rounded-2xl border border-slate-100 px-4 py-3">
+          <div class="h-10 w-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-bold"><%= idx+1 %></div>
+          <div class="flex-1">
+            <p class="font-semibold"><%= b.court_name || 'Lapangan Favorit' %></p>
+            <p class="text-xs text-slate-500"><%= b.booking_date ? new Date(b.booking_date).toISOString().slice(0,10) : 'YYYY-MM-DD' %> • <%= b.start_time ? String(b.start_time).slice(0,5) : '--:--' %></p>
+          </div>
+          <span class="badge badge-success">Ready</span>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+</section>
+
+<section class="mt-8">
+  <div class="mb-4 flex items-center justify-between">
+    <h3 class="text-xl font-black">Komunitas</h3>
+    <a href="#" class="btn-ghost text-sm">Lihat semua</a>
+  </div>
+  <div class="space-y-3">
+    <% const community = [
+      { name:"Raka", sport:"Badminton", level:"Intermediate", time:"Malam ini 19:00", status:"Mencari partner" },
+      { name:"Dina", sport:"Futsal", level:"Beginner", time:"Besok 16:00", status:"Butuh 2 pemain" },
+      { name:"Budi", sport:"Basket", level:"Advanced", time:"Sabtu 09:00", status:"Sparring" }
+    ]; %>
+    <% community.forEach(c => { %>
+      <div class="community-card">
+        <div>
+          <p class="font-semibold"><%= c.name %> • <%= c.sport %> • <%= c.level %></p>
+          <p class="text-xs text-slate-500"><%= c.time %></p>
+        </div>
+        <span class="badge badge-success"><%= c.status %></span>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<section class="mt-8">
+  <div class="mb-4 flex items-center justify-between">
+    <h2 class="text-2xl font-black">Lapangan populer</h2>
+    <a href="/user/courts" class="btn-ghost">Lihat semua</a>
+  </div>
+  <div class="grid gap-5 md:grid-cols-3">
+    <% popularCourts.forEach((court) => { %>
+      <%- include("../partials/court-card", { court }) %>
+    <% }) %>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+<section class="card">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h2 class="text-2xl font-black">Data Lapangan</h2>
+      <p class="text-sm text-slate-600">Kelola semua lapangan yang tampil di aplikasi.</p>
+    </div>
+    <a href="/admin/courts/create" class="btn-primary">Tambah Lapangan</a>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="table-slim">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Tipe</th>
+          <th>Harga</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% courts.forEach((court) => { %>
+          <tr class="border-t border-slate-100">
+            <td class="py-4 font-semibold"><%= court.name %></td>
+            <td class="py-4 capitalize"><%= court.type %></td>
+            <td class="py-4">Rp <%= Number(court.price_per_hour).toLocaleString("id-ID") %></td>
+            <td class="py-4">
+              <span class="badge <%= court.status === 'active' ? 'badge-success' : 'badge-muted' %>"><%= court.status %></span>
+            </td>
+            <td class="py-4">
+              <div class="flex gap-2">
+                <a href="/admin/courts/<%= court.id %>/edit" class="btn-ghost text-xs">Edit</a>
+                <form action="/admin/courts/<%= court.id %>?_method=DELETE" method="POST">
+                  <button class="btn-danger text-xs">Hapus</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
