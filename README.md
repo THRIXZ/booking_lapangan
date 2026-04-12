@@ -1,6 +1,6 @@
-# Badminton Booking Node
+# Website Simulasi Booking Lapangan 
 
-Project booking lapangan yang meniru alur Laravel sebelumnya, tetapi dibangun dengan `Node.js`, `Express`, `MySQL`, dan `Tailwind CSS`.
+Project simulasi web booking lapangan yang bertujuan untuk menghasilkan sebuah website yang dapat memudahkan pengguna dalam melakukan booking lapangan yang dapat dilakukan secara online serta dibuat dengan menggunakan `Node.js`, `Express`, `MySQL`, dan `Tailwind CSS`.
 
 ## Stack
 
