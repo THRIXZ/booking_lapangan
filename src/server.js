@@ -33,6 +33,8 @@ app.use(attachCurrentUser);
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.currentUser || null;
+  res.locals.hideNavbar = false;
+  res.locals.compactFooter = false;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   const vErr = req.flash("validationErrors");
