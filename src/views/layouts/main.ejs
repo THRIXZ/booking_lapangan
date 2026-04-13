@@ -4,8 +4,11 @@
     <%- include("../partials/head") %>
   </head>
   <body class="min-h-screen text-slate-900">
+    <% const isAuthPage = Boolean(hideNavbar); %>
     <div class="page-grid">
-      <%- include("../partials/navbar") %>
+      <% if (!isAuthPage) { %>
+        <%- include("../partials/navbar") %>
+      <% } %>
 
       <% if (currentUser) { %>
         <header class="mb-6 card">
@@ -51,9 +54,9 @@
         </div>
       <% } %>
 
-      <main class="mt-6"><%- body %></main>
+      <main class="<%= isAuthPage ? 'auth-main' : 'mt-6' %>"><%- body %></main>
 
-      <%- include("../partials/footer") %>
+      <%- include("../partials/footer", { compactFooter }) %>
     </div>
 
     <% if (currentUser) { %>

@@ -1,8 +1,9 @@
-<section class="mx-auto max-w-xl card">
-  <p class="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-700">Create account</p>
-  <h1 class="mt-3 text-3xl font-black">Daftar akun baru</h1>
+<section class="auth-shell auth-shell-wide">
+  <p class="auth-kicker">Create account</p>
+  <h1 class="auth-title">Daftar akun baru</h1>
+  <p class="auth-subtitle">Lengkapi data berikut untuk membuat akun booking.</p>
 
-  <form action="/register" method="POST" class="mt-8 grid gap-5 md:grid-cols-2">
+  <form action="/register" method="POST" class="mt-7 grid gap-4 md:grid-cols-2">
     <div class="md:col-span-2">
       <label class="mb-2 block text-sm font-semibold text-slate-700">Nama</label>
       <input type="text" name="name" value="<%= formData.name || '' %>" class="input" />
@@ -23,8 +24,8 @@
       <label class="mb-2 block text-sm font-semibold text-slate-700">Konfirmasi Password</label>
       <input type="password" name="password_confirmation" class="input" />
     </div>
-    <button class="md:col-span-2 btn-primary">Buat Akun</button>
+    <button class="md:col-span-2 btn-primary">Daftar</button>
   </form>
 
-  <p class="mt-6 text-sm text-slate-600">Sudah punya akun? <a href="/login" class="font-semibold text-emerald-700">Login</a></p>
+  <p class="mt-6 text-sm text-slate-600">Sudah punya akun? <a href="/login" class="font-semibold text-emerald-700">Masuk</a></p>
 </section>

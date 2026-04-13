@@ -103,6 +103,10 @@ body {
   @apply mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8;
 }
 
+.auth-main {
+  @apply mx-auto mt-6 w-full max-w-3xl;
+}
+
 .badge-cat {
   @apply inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold text-white uppercase tracking-wide;
 }
@@ -115,6 +119,113 @@ body {
 .price-old { @apply line-through text-slate-400 text-sm; }
 .favorite-btn { @apply absolute right-3 top-3 h-9 w-9 rounded-full bg-white/80 flex items-center justify-center text-rose-500 shadow; }
 .favorite-btn:hover { @apply scale-105; }
+
+.site-nav {
+  @apply relative z-10 mb-6 flex items-center justify-between rounded-2xl border border-white/70 bg-white/80 px-5 py-3 shadow-card backdrop-blur;
+}
+
+.site-logo {
+  @apply flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-sm font-black text-white;
+}
+
+.apple-menu {
+  @apply relative;
+}
+
+.apple-menu-btn {
+  @apply flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-white transition-all;
+  list-style: none;
+}
+
+.apple-menu-btn::-webkit-details-marker {
+  display: none;
+}
+
+.apple-menu-btn span {
+  width: 18px;
+  height: 1.8px;
+  border-radius: 999px;
+  background: #0f172a;
+  display: block;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.apple-menu-btn span + span {
+  margin-top: 4px;
+}
+
+.apple-menu[open] .apple-menu-btn span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.apple-menu[open] .apple-menu-btn span:nth-child(2) {
+  opacity: 0;
+}
+
+.apple-menu[open] .apple-menu-btn span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.apple-menu-panel {
+  @apply absolute right-0 mt-3 flex min-w-[220px] flex-col gap-1 rounded-2xl border border-slate-200 bg-white p-3 text-sm shadow-card;
+}
+
+.apple-menu-panel a,
+.apple-menu-panel button {
+  @apply rounded-xl px-3 py-2 text-left font-medium text-slate-700 transition-colors hover:bg-slate-100;
+}
+
+.apple-menu-name {
+  @apply px-3 pt-1 text-sm font-semibold text-slate-900;
+}
+
+.apple-menu-role {
+  @apply px-3 pb-2 text-xs uppercase tracking-[0.2em] text-slate-500;
+}
+
+.footer-main {
+  @apply mt-10 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/60 bg-white/80 px-6 py-5 text-sm text-slate-600 shadow-card backdrop-blur;
+}
+
+.footer-main-left {
+  @apply flex items-center gap-2;
+}
+
+.footer-main-links {
+  @apply flex gap-4;
+}
+
+.footer-main-links a {
+  @apply hover:text-slate-900;
+}
+
+.footer-auth {
+  @apply mt-8 border-t border-slate-200 px-2 py-5 text-center text-sm text-slate-500;
+}
+
+.footer-auth p {
+  @apply font-semibold text-slate-700;
+}
+
+.auth-shell {
+  @apply mx-auto w-full max-w-md rounded-3xl border border-white/60 bg-white/90 p-6 shadow-card backdrop-blur;
+}
+
+.auth-shell-wide {
+  @apply max-w-xl;
+}
+
+.auth-kicker {
+  @apply text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700;
+}
+
+.auth-title {
+  @apply mt-3 text-3xl font-black text-slate-900;
+}
+
+.auth-subtitle {
+  @apply mt-2 text-sm text-slate-600;
+}
 
 .toast {
   @apply fixed right-4 top-4 z-50 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm shadow-card backdrop-blur border;

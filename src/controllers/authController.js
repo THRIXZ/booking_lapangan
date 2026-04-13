@@ -6,7 +6,11 @@ function showLogin(req, res) {
     return res.redirect("/dashboard");
   }
 
-  res.render("auth/login", { title: "Login" });
+  res.render("auth/login", {
+    title: "Login",
+    hideNavbar: true,
+    compactFooter: true,
+  });
 }
 
 function showRegister(req, res) {
@@ -14,7 +18,11 @@ function showRegister(req, res) {
     return res.redirect("/dashboard");
   }
 
-  res.render("auth/register", { title: "Register" });
+  res.render("auth/register", {
+    title: "Register",
+    hideNavbar: true,
+    compactFooter: true,
+  });
 }
 
 async function login(req, res, next) {

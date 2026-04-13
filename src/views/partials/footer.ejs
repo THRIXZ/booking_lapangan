@@ -1,13 +1,18 @@
-<footer class="mt-10 rounded-2xl bg-white/80 backdrop-blur border border-white/60 px-6 py-5 shadow-card text-sm text-slate-600">
-  <div class="flex flex-wrap gap-4 items-center justify-between">
-    <div class="flex items-center gap-2">
+<% if (compactFooter) { %>
+  <footer class="footer-auth">
+    <p>Booking Lapangan</p>
+    <span>Support: tubespweb</span>
+  </footer>
+<% } else { %>
+  <footer class="footer-main">
+    <div class="footer-main-left">
       <i class="fa-solid fa-headset text-emerald-600"></i>
       <span>CS WhatsApp: tubespweb</span>
     </div>
-    <div class="flex gap-4">
-      <a href="#" class="hover:text-slate-900">FAQ</a>
-      <a href="#" class="hover:text-slate-900">Terms</a>
-      <a href="#" class="hover:text-slate-900">Instagram</a>
+    <div class="footer-main-links">
+      <a href="#">FAQ</a>
+      <a href="#">Terms</a>
+      <a href="#">Instagram</a>
     </div>
-  </div>
-</footer>
+  </footer>
+<% } %>
