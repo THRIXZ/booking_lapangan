@@ -9,7 +9,7 @@ function showLogin(req, res) {
   res.render("auth/login", {
     title: "Login",
     hideNavbar: true,
-    compactFooter: true,
+    hideFooter: true,
   });
 }
 
@@ -21,7 +21,7 @@ function showRegister(req, res) {
   res.render("auth/register", {
     title: "Register",
     hideNavbar: true,
-    compactFooter: true,
+    hideFooter: true,
   });
 }
 

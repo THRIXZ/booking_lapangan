@@ -56,7 +56,9 @@
 
       <main class="<%= isAuthPage ? 'auth-main' : 'mt-6' %>"><%- body %></main>
 
-      <%- include("../partials/footer", { compactFooter }) %>
+      <% if (!hideFooter) { %>
+        <%- include("../partials/footer", { compactFooter }) %>
+      <% } %>
     </div>
 
     <% if (currentUser) { %>

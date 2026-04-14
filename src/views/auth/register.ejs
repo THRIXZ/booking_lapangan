@@ -1,31 +1,54 @@
-<section class="auth-shell auth-shell-wide">
-  <p class="auth-kicker">Create account</p>
-  <h1 class="auth-title">Daftar akun baru</h1>
-  <p class="auth-subtitle">Lengkapi data berikut untuk membuat akun booking.</p>
+<section class="auth-screen">
+  <div class="auth-shell auth-shell-wide">
+    <div class="auth-brand-mark">
+      <span class="site-logo">BL</span>
+    </div>
+    <p class="auth-kicker">Booking Lapangan</p>
+    <h1 class="auth-title">Daftar Akun Baru</h1>
+    <p class="auth-subtitle">Lengkapi data berikut untuk mulai booking lapangan dengan tampilan yang rapi dan konsisten.</p>
 
-  <form action="/register" method="POST" class="mt-7 grid gap-4 md:grid-cols-2">
-    <div class="md:col-span-2">
-      <label class="mb-2 block text-sm font-semibold text-slate-700">Nama</label>
-      <input type="text" name="name" value="<%= formData.name || '' %>" class="input" />
-    </div>
-    <div>
-      <label class="mb-2 block text-sm font-semibold text-slate-700">Email</label>
-      <input type="email" name="email" value="<%= formData.email || '' %>" class="input" />
-    </div>
-    <div>
-      <label class="mb-2 block text-sm font-semibold text-slate-700">Telepon</label>
-      <input type="text" name="phone" value="<%= formData.phone || '' %>" class="input" />
-    </div>
-    <div>
-      <label class="mb-2 block text-sm font-semibold text-slate-700">Password</label>
-      <input type="password" name="password" class="input" />
-    </div>
-    <div>
-      <label class="mb-2 block text-sm font-semibold text-slate-700">Konfirmasi Password</label>
-      <input type="password" name="password_confirmation" class="input" />
-    </div>
-    <button class="md:col-span-2 btn-primary">Daftar</button>
-  </form>
+    <form action="/register" method="POST" class="mt-8 grid gap-4 md:grid-cols-2">
+      <div class="md:col-span-2">
+        <label class="auth-label">Nama Lengkap</label>
+        <div class="auth-input-wrap">
+          <i class="fa-regular fa-user"></i>
+          <input type="text" name="name" value="<%= formData.name || '' %>" class="input auth-input" placeholder="Masukkan nama lengkap" />
+        </div>
+      </div>
+      <div>
+        <label class="auth-label">Email</label>
+        <div class="auth-input-wrap">
+          <i class="fa-regular fa-envelope"></i>
+          <input type="email" name="email" value="<%= formData.email || '' %>" class="input auth-input" placeholder="nama@domain.com" />
+        </div>
+      </div>
+      <div>
+        <label class="auth-label">Telepon</label>
+        <div class="auth-input-wrap">
+          <i class="fa-solid fa-phone"></i>
+          <input type="text" name="phone" value="<%= formData.phone || '' %>" class="input auth-input" placeholder="08xxxxxxxxxx" />
+        </div>
+      </div>
+      <div>
+        <label class="auth-label">Password</label>
+        <div class="auth-input-wrap">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" name="password" class="input auth-input" placeholder="Buat password" />
+        </div>
+      </div>
+      <div>
+        <label class="auth-label">Konfirmasi Password</label>
+        <div class="auth-input-wrap">
+          <i class="fa-solid fa-shield-halved"></i>
+          <input type="password" name="password_confirmation" class="input auth-input" placeholder="Ulangi password" />
+        </div>
+      </div>
+      <button class="auth-submit md:col-span-2" type="submit">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Daftar</span>
+      </button>
+    </form>
 
-  <p class="mt-6 text-sm text-slate-600">Sudah punya akun? <a href="/login" class="font-semibold text-emerald-700">Masuk</a></p>
+    <p class="auth-switch">Sudah punya akun? <a href="/login">Masuk di sini</a></p>
+  </div>
 </section>
