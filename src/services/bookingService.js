@@ -1,15 +1,32 @@
 const db = require("../config/db");
 
 async function getUserBookings(userId) {
-  const [rows] = await db.execute(
-    `SELECT bookings.*, courts.name AS court_name, courts.type AS court_type
-     FROM bookings
-     JOIN courts ON courts.id = bookings.court_id
-     WHERE bookings.user_id = ?
-     ORDER BY bookings.created_at DESC, bookings.id DESC`,
-    [userId]
-  );
-  return rows;
+  try {
+    const [rows] = await db.execute(
+      `SELECT bookings.*, courts.name AS court_name, courts.type AS court_type
+       FROM bookings
+       JOIN courts ON courts.id = bookings.court_id
+       WHERE bookings.user_id = ?
+       ORDER BY bookings.created_at DESC, bookings.id DESC`,
+      [userId]
+    );
+    return rows;
+  } catch (error) {
+    // Older production schemas may not have every joined column yet.
+    if (error.code !== "ER_BAD_FIELD_ERROR") {
+      throw error;
+    }
+
+    const [rows] = await db.execute(
+      `SELECT bookings.*, courts.name AS court_name
+       FROM bookings
+       JOIN courts ON courts.id = bookings.court_id
+       WHERE bookings.user_id = ?
+       ORDER BY bookings.id DESC`,
+      [userId]
+    );
+    return rows;
+  }
 }
 
 async function getAllBookings() {
@@ -83,15 +100,34 @@ async function updateBookingStatus(id, { status, paymentStatus }) {
 }
 
 async function getUserDashboardStats(userId) {
-  const [[totals]] = await db.execute(
-    `SELECT
-        COUNT(*) AS totalBookings,
-        SUM(CASE WHEN booking_date >= CURDATE() AND status <> 'cancelled' THEN 1 ELSE 0 END) AS upcomingBookings,
-        SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completedBookings
-     FROM bookings
-     WHERE user_id = ?`,
-    [userId]
-  );
+  let totals;
+
+  try {
+    [[totals]] = await db.execute(
+      `SELECT
+          COUNT(*) AS totalBookings,
+          SUM(CASE WHEN booking_date >= CURDATE() AND status <> 'cancelled' THEN 1 ELSE 0 END) AS upcomingBookings,
+          SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completedBookings
+       FROM bookings
+       WHERE user_id = ?`,
+      [userId]
+    );
+  } catch (error) {
+    // Keep the dashboard alive when production is running an older bookings schema.
+    if (error.code !== "ER_BAD_FIELD_ERROR") {
+      throw error;
+    }
+
+    [[totals]] = await db.execute(
+      `SELECT
+          COUNT(*) AS totalBookings,
+          SUM(CASE WHEN booking_date >= CURDATE() THEN 1 ELSE 0 END) AS upcomingBookings,
+          0 AS completedBookings
+       FROM bookings
+       WHERE user_id = ?`,
+      [userId]
+    );
+  }
 
   return {
     totalBookings: Number(totals.totalBookings || 0),

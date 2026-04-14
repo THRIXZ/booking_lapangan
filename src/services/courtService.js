@@ -16,10 +16,22 @@ async function getActiveCourts() {
 
 async function getPopularCourts(limit = 3) {
   const safeLimit = Math.max(1, parseInt(limit, 10) || 3);
-  const [rows] = await db.query(
-    `SELECT * FROM courts WHERE status = 'active' ORDER BY created_at DESC, id DESC LIMIT ${safeLimit}`
-  );
-  return rows;
+  try {
+    const [rows] = await db.query(
+      `SELECT * FROM courts WHERE status = 'active' ORDER BY created_at DESC, id DESC LIMIT ${safeLimit}`
+    );
+    return rows;
+  } catch (error) {
+    // Fallback for deployments whose courts table does not yet include a status column.
+    if (error.code !== "ER_BAD_FIELD_ERROR") {
+      throw error;
+    }
+
+    const [rows] = await db.query(
+      `SELECT * FROM courts ORDER BY id DESC LIMIT ${safeLimit}`
+    );
+    return rows;
+  }
 }
 
 async function searchCourts({ q, type, price }) {
