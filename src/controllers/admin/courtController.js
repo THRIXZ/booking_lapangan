@@ -1,5 +1,6 @@
 const courtService = require("../../services/courtService");
 const { setOldInput, setValidationErrors } = require("../../utils/http");
+const { normalizeCourtImage } = require("../../utils/courtImage");
 
 async function index(req, res, next) {
   try {
@@ -32,7 +33,7 @@ async function store(req, res, next) {
     }
 
     const uploadedImage = req.file ? `/uploads/${req.file.filename}` : null;
-    const imagePath = uploadedImage || image || null;
+    const imagePath = uploadedImage || normalizeCourtImage(image);
 
     await courtService.createCourt({
       name,
@@ -67,7 +68,7 @@ async function update(req, res, next) {
   try {
     const { name, type, price_per_hour, image, status } = req.body;
     const uploadedImage = req.file ? `/uploads/${req.file.filename}` : null;
-    const imagePath = uploadedImage || image || null;
+    const imagePath = uploadedImage || normalizeCourtImage(image);
 
     await courtService.updateCourt(req.params.id, {
       name,

@@ -1,17 +1,18 @@
 const db = require("../config/db");
+const { normalizeCourtImage, normalizeCourtRecord } = require("../utils/courtImage");
 
 async function getAllCourts() {
   const [rows] = await db.execute(
     "SELECT * FROM courts ORDER BY created_at DESC, id DESC"
   );
-  return rows;
+  return rows.map(normalizeCourtRecord);
 }
 
 async function getActiveCourts() {
   const [rows] = await db.execute(
     "SELECT * FROM courts WHERE status = 'active' ORDER BY created_at DESC, id DESC"
   );
-  return rows;
+  return rows.map(normalizeCourtRecord);
 }
 
 async function getPopularCourts(limit = 3) {
@@ -20,7 +21,7 @@ async function getPopularCourts(limit = 3) {
     const [rows] = await db.query(
       `SELECT * FROM courts WHERE status = 'active' ORDER BY created_at DESC, id DESC LIMIT ${safeLimit}`
     );
-    return rows;
+    return rows.map(normalizeCourtRecord);
   } catch (error) {
     // Fallback for deployments whose courts table does not yet include a status column.
     if (error.code !== "ER_BAD_FIELD_ERROR") {
@@ -30,7 +31,7 @@ async function getPopularCourts(limit = 3) {
     const [rows] = await db.query(
       `SELECT * FROM courts ORDER BY id DESC LIMIT ${safeLimit}`
     );
-    return rows;
+    return rows.map(normalizeCourtRecord);
   }
 }
 
@@ -58,21 +59,21 @@ async function searchCourts({ q, type, price }) {
 
   sql += " ORDER BY created_at DESC, id DESC";
   const [rows] = await db.execute(sql, params);
-  return rows;
+  return rows.map(normalizeCourtRecord);
 }
 
 async function findCourtById(id) {
   const [rows] = await db.execute("SELECT * FROM courts WHERE id = ? LIMIT 1", [
     id,
   ]);
-  return rows[0] || null;
+  return normalizeCourtRecord(rows[0] || null);
 }
 
 async function createCourt({ name, type, pricePerHour, image, status }) {
   await db.execute(
     `INSERT INTO courts (name, type, price_per_hour, image, status, created_at, updated_at)
      VALUES (?, ?, ?, ?, ?, NOW(), NOW())`,
-    [name, type, pricePerHour, image || null, status]
+    [name, type, pricePerHour, normalizeCourtImage(image), status]
   );
 }
 
@@ -81,7 +82,7 @@ async function updateCourt(id, { name, type, pricePerHour, image, status }) {
     `UPDATE courts
      SET name = ?, type = ?, price_per_hour = ?, image = ?, status = ?, updated_at = NOW()
      WHERE id = ?`,
-    [name, type, pricePerHour, image || null, status, id]
+    [name, type, pricePerHour, normalizeCourtImage(image), status, id]
   );
 }
 
